@@ -35,13 +35,15 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CMSDepartmentList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CtxMenuStripDepartmentList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.RefreshRecords = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.DeactivateRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.BtnAdd = new System.Windows.Forms.Button();
+            this.BtnBack = new System.Windows.Forms.Button();
+            this.BtnConnect = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.CMSDepartmentList.SuspendLayout();
+            this.CtxMenuStripDepartmentList.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -59,7 +61,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe Fluent Icons", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(253, 9);
+            this.label1.Location = new System.Drawing.Point(188, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(307, 32);
             this.label1.TabIndex = 0;
@@ -71,7 +73,7 @@
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.LsvDepartment.ContextMenuStrip = this.CMSDepartmentList;
+            this.LsvDepartment.ContextMenuStrip = this.CtxMenuStripDepartmentList;
             this.LsvDepartment.Font = new System.Drawing.Font("Segoe Fluent Icons", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LsvDepartment.FullRowSelect = true;
             this.LsvDepartment.HideSelection = false;
@@ -99,14 +101,14 @@
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 200;
             // 
-            // CMSDepartmentList
+            // CtxMenuStripDepartmentList
             // 
-            this.CMSDepartmentList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CtxMenuStripDepartmentList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.RefreshRecords,
             this.UpdateRecord,
             this.DeactivateRecord});
-            this.CMSDepartmentList.Name = "CMSDepartmentList";
-            this.CMSDepartmentList.Size = new System.Drawing.Size(114, 70);
+            this.CtxMenuStripDepartmentList.Name = "CMSDepartmentList";
+            this.CtxMenuStripDepartmentList.Size = new System.Drawing.Size(114, 70);
             // 
             // RefreshRecords
             // 
@@ -128,18 +130,41 @@
             // 
             // BtnAdd
             // 
-            this.BtnAdd.Location = new System.Drawing.Point(577, 336);
+            this.BtnAdd.Location = new System.Drawing.Point(577, 302);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(70, 31);
             this.BtnAdd.TabIndex = 2;
             this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = true;
             // 
+            // BtnBack
+            // 
+            this.BtnBack.Location = new System.Drawing.Point(42, 289);
+            this.BtnBack.Name = "BtnBack";
+            this.BtnBack.Size = new System.Drawing.Size(106, 44);
+            this.BtnBack.TabIndex = 5;
+            this.BtnBack.Text = "Back";
+            this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.Visible = false;
+            this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
+            // 
+            // BtnConnect
+            // 
+            this.BtnConnect.Location = new System.Drawing.Point(328, 326);
+            this.BtnConnect.Name = "BtnConnect";
+            this.BtnConnect.Size = new System.Drawing.Size(75, 23);
+            this.BtnConnect.TabIndex = 6;
+            this.BtnConnect.Text = "Connect DB";
+            this.BtnConnect.UseVisualStyleBackColor = true;
+            this.BtnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
+            // 
             // DepartmentDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(695, 450);
+            this.Controls.Add(this.BtnConnect);
+            this.Controls.Add(this.BtnBack);
             this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.LsvDepartment);
             this.Controls.Add(this.panel1);
@@ -147,10 +172,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DepartmentDetails";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            //this.Load += new System.EventHandler(this.DepartmentDetails_Load);
+            this.Load += new System.EventHandler(this.DepartmentDetails_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.CMSDepartmentList.ResumeLayout(false);
+            this.CtxMenuStripDepartmentList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -163,10 +188,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ContextMenuStrip CMSDepartmentList;
+        private System.Windows.Forms.ContextMenuStrip CtxMenuStripDepartmentList;
         private System.Windows.Forms.ToolStripMenuItem RefreshRecords;
         private System.Windows.Forms.ToolStripMenuItem UpdateRecord;
         private System.Windows.Forms.ToolStripMenuItem DeactivateRecord;
         private System.Windows.Forms.Button BtnAdd;
+        private System.Windows.Forms.Button BtnBack;
+        private System.Windows.Forms.Button BtnConnect;
     }
 }

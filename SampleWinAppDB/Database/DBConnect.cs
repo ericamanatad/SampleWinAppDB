@@ -225,7 +225,6 @@ namespace SampleWinAppDB.Database
                 if (Connect())
                 {
                     string query = "SELECT * FROM `department` WHERE IsActive = 1 AND CollegeID = " + collegeID +  ";";
-                    MessageBox.Show(query);
                     //create MySQL command with the corresponding query string and connection
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     //create MySQL data reader
@@ -248,7 +247,8 @@ namespace SampleWinAppDB.Database
 
                             Department department = new Department(departmentID, departmentName, departmnentCode, isActive);
                             departmentRecords.Add(department);
-                            
+
+
                         }
                     }
 

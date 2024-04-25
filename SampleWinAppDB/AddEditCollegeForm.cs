@@ -16,10 +16,10 @@ namespace SampleWinAppDB
             InitializeComponent();
         }
 
-        public AddEditCollegeForm(DBConnect dbContext, College toUpdate)
+        public AddEditCollegeForm(DBConnect dbConnect, College toUpdate)
         {
             InitializeComponent();
-            this.dbconnect = dbContext;
+            dbconnect = dbConnect;
             this.toUpdate = toUpdate;
             //update button label
             if(this.toUpdate != null)
@@ -28,12 +28,11 @@ namespace SampleWinAppDB
                 BtnAddEdit.Text = "Add";
         }
 
-        public AddEditCollegeForm(DBConnect dbContext, Department toBeUpdated, int x )
+        public AddEditCollegeForm(DBConnect dBconnect, Department toBeUpdated, int x )
         {
             InitializeComponent();
             labelCollegeName.Text = "Department Name :";
             labelCollegeCode.Text = "Department Code :";
-            this.dbconnect = dbContext;
             this.toBeUpdated = toBeUpdated;
             //update button label
             if (this.toBeUpdated != null)
@@ -42,22 +41,19 @@ namespace SampleWinAppDB
                 BtnAddEdit.Text = "Add Dep";
         }
 
-
         private void BtnAddEdit_Click(object sender, EventArgs e)
         {
             try
             {
                 bool status = false;
                 //get the inputs from the form
-                College college = new College();                   
+                College college = new College();
                 college.CollegeName = TxtCollegeName.Text.Trim();
                 college.CollegeCode = TxtCollegeCode.Text.Trim();
-                Department department = new Department();
-                department.depName = TxtCollegeName.Text.Trim();
-                department.depCode = TxtCollegeCode.Text.Trim();
+
                 //validate inputs
 
-//COLLEGE
+                //COLLEGE
                 if (!string.IsNullOrEmpty(college.CollegeName) && !string.IsNullOrEmpty(college.CollegeCode))
                 {
                     if (toUpdate == null)
@@ -74,6 +70,8 @@ namespace SampleWinAppDB
                     }
                     else
                     {
+
+
                         //update college record
                         college.CollegeID = toUpdate.CollegeID;
                         status = dbconnect.UpdateCollegeRecord(college);
@@ -87,40 +85,50 @@ namespace SampleWinAppDB
                             MessageBox.Show("Could not update record!", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-        //DEPARTMENT
-                if (!string.IsNullOrEmpty(department.depName) && !string.IsNullOrEmpty(department.depCode))
-                {
-                    if (toUpdate == null)
-                    {
-                        //add college record
-                        status = dbconnect.AddDepartmentRecords(department);
-                        if (status)
-                        {
-                            MessageBox.Show("Record added successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Close();
-                        }
-                        else
-                            MessageBox.Show("Could not add record!", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        //update college record
-                        department.depID = toBeUpdated.depID;
-                        status = dbconnect.UpdateDepartmentRecords(department);
-                        if (status)
-                        {
-                            MessageBox.Show("Record updated successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            //close current form
-                            Close();
-
-                        }
-                        else
-                            MessageBox.Show("Could not update record!", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                    MessageBox.Show("Please complete the form!", "Test App", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            /*          //DEPARTMENT
+
+                      if (labelCollegeName.Text == "Department Name :" && labelCollegeCode.Text == "Department Code :")
+                      {
+                          Department department = new Department();
+                          department.depName = TxtCollegeName.Text.Trim();
+                          department.depCode = TxtCollegeCode.Text.Trim();
+
+                          if (!string.IsNullOrEmpty(department.depName) && !string.IsNullOrEmpty(department.depCode))
+                          {
+                              if (toBeUpdated == null)
+                              {
+                                  //add department record
+                                  status = dbconnect.AddDepartmentRecords(department);
+                                  if (status)
+                                  {
+                                      MessageBox.Show("Record added successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                      Close();
+                                  }
+                                  else
+                                      MessageBox.Show("Could not add record!", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                              }
+                              else
+                              {
+          //update department record
+                                  department.depID = toBeUpdated.depID;
+                                  status = dbconnect.UpdateDepartmentRecords(department);
+                                  if (status)
+                                  {
+                                      MessageBox.Show("Record updated successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                      //close current form
+                                      Close();
+
+                                  }
+                                  else
+                                      MessageBox.Show("Could not update record!", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                              }
+                          }
+                      }
+                      else
+                          MessageBox.Show("Please complete the form!", "Test App", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  }
+            */
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
